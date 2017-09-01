@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Net.Mail;
 using System.Data;
 using System.Data.SqlClient;
+using System.Net;
 
 namespace EmailTest
 {
@@ -18,7 +19,7 @@ namespace EmailTest
             DataTable dt = new DataTable();
             using (SqlConnection con = new SqlConnection(strConnectionString))
             using (var cmd = new SqlCommand(@"SELECT EmailMessageFrom, EmailMessageTo, EmailMessageSubject, EmailMessageBody
-from  Email_SmtpLog where smtprequestid = 27633", con))
+from  Email_SmtpLog where smtprequestid = 1000", con))
             using (var da = new SqlDataAdapter(cmd))
             {
                 da.Fill(dt);
@@ -26,12 +27,14 @@ from  Email_SmtpLog where smtprequestid = 27633", con))
             foreach (DataRow row in dt.Rows)
             {
                 SmtpClient client = new SmtpClient();
+                //client.Credentials = CredentialCache.DefaultNetworkCredentials;
                 //MailAddress from = new MailAddress(row["EmailMessageFrom"].ToString());
-                MailAddress from = new MailAddress("ftacademics@haas.berkeley.edu");
+                MailAddress from = new MailAddress("bwaldman@haas.berkeley.edu");
                 //MailAddress from = new MailAddress("ties@haas.berkeley.edu ");
-                //MailAddress to = new MailAddress(row["EmailMessageTo"].ToString());
-                MailAddress to = new MailAddress("bwaldman@haas.berkeley.edu");
+                //MailAddress to = new MailAddress(row["EmailMessageTo"].ToString());                
+                MailAddress to = new MailAddress("bwaldman@sonic.net");                
                 MailMessage message = new MailMessage();
+                //message.ReplyToList.Add("bwaldman@sonic.net");
                 message.From = from;
                 message.To.Add(to);
                 message.Body = row["EmailMessageBody"].ToString();
