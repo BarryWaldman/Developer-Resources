@@ -29,12 +29,12 @@ from  Email_SmtpLog where smtprequestid = 1000", con))
                 SmtpClient client = new SmtpClient();
                 //client.Credentials = CredentialCache.DefaultNetworkCredentials;
                 //MailAddress from = new MailAddress(row["EmailMessageFrom"].ToString());
-                MailAddress from = new MailAddress("ftacademics@haas.berkeley.edu");
+                MailAddress from = new MailAddress("scheduler@haas.berkeley.edu");
                 //MailAddress from = new MailAddress("bwaldman@haas.berkeley.edu");
                 //MailAddress from = new MailAddress("ties@haas.berkeley.edu ");
                 //MailAddress to = new MailAddress(row["EmailMessageTo"].ToString());                
-                //MailAddress to = new MailAddress("bwaldman@sonic.net");
-                MailAddress to = new MailAddress("bwaldman@berkeley.edu");   
+                MailAddress to = new MailAddress("bwaldman@sonic.net");
+                //MailAddress to = new MailAddress("bwaldman@berkeley.edu");   
                 MailMessage message = new MailMessage();
                 //message.ReplyToList.Add("bwaldman@sonic.net");
                 message.From = from;
